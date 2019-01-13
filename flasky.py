@@ -5,11 +5,11 @@ dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
 if os.path.exists(dotenv_path):
     load_dotenv(dotenv_path)
 
-COV = None
-if os.environ.get('FLASK_COVERAGE'):
-    import coverage
-    COV = coverage.coverage(branch=True, include='app/*')
-    COV.start()
+# COV = None
+# if os.environ.get('FLASK_COVERAGE'):
+#     import coverage
+#     COV = coverage.coverage(branch=True, include='app/*')
+#     COV.start()
 
 import sys
 import click
@@ -18,6 +18,9 @@ from app import create_app, db
 from app.models import User, Role, Permission, Post, Comment
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
+
+app.add_template_global(app.config['APP_NAME'], 'app_name')
+
 migrate = Migrate(app, db)
 
 
