@@ -11,7 +11,6 @@ from . import db, login_manager
 
 
 class Permission:
-    FOLLOW = 1
     COMMENT = 2
     WRITE = 4
     MODERATE = 8
@@ -34,9 +33,8 @@ class Role(db.Model):
     @staticmethod
     def insert_roles():
         roles = {
-            'User': [Permission.COMMENT, Permission.WRITE],
-            'Moderator': [Permission.COMMENT,
-                          Permission.WRITE, Permission.MODERATE],
+            'User': [Permission.COMMENT],
+            'Moderator': [Permission.COMMENT, Permission.MODERATE],
             'Administrator': [Permission.COMMENT,
                               Permission.WRITE, Permission.MODERATE,
                               Permission.ADMIN],
