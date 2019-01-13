@@ -34,10 +34,10 @@ class Role(db.Model):
     @staticmethod
     def insert_roles():
         roles = {
-            'User': [Permission.FOLLOW, Permission.COMMENT, Permission.WRITE],
-            'Moderator': [Permission.FOLLOW, Permission.COMMENT,
+            'User': [Permission.COMMENT, Permission.WRITE],
+            'Moderator': [Permission.COMMENT,
                           Permission.WRITE, Permission.MODERATE],
-            'Administrator': [Permission.FOLLOW, Permission.COMMENT,
+            'Administrator': [Permission.COMMENT,
                               Permission.WRITE, Permission.MODERATE,
                               Permission.ADMIN],
         }
