@@ -5,16 +5,16 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config:
     APP_NAME = os.environ.get('APP_NAME') or 'Flasky'
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
-    MAIL_SERVER = os.environ.get('MAIL_SERVER', 'smtp.googlemail.com')
-    MAIL_PORT = int(os.environ.get('MAIL_PORT', '587'))
+    MAIL_SERVER = os.environ.get('MAIL_SERVER', 'smtp.126.com')
+    MAIL_PORT = int(os.environ.get('MAIL_PORT', '25'))
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS', 'true').lower() in \
         ['true', 'on', '1']
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     MAIL_SUBJECT_PREFIX = '[%s]' % APP_NAME
-    MAIL_SENDER = '%s Admin <%s@example.com>' % (APP_NAME, APP_NAME)
+    MAIL_SENDER = MAIL_USERNAME
     ADMIN = os.environ.get('ADMIN')
-    SSL_REDIRECT = False
+    SSL_REDIRECT = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_RECORD_QUERIES = True
     POSTS_PER_PAGE = 20
