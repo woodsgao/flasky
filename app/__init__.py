@@ -6,7 +6,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_pagedown import PageDown
 from config import config
+from celery import Celery
 
+
+celery = Celery(__name__, broker=config['base'].CELERY_BROKER_URL)
 bootstrap = Bootstrap()
 mail = Mail()
 moment = Moment()
@@ -28,6 +31,7 @@ def create_app(config_name):
     db.init_app(app)
     login_manager.init_app(app)
     pagedown.init_app(app)
+    celery.conf.update(app.config)
 
     if app.config['SSL_REDIRECT']:
         from flask_sslify import SSLify

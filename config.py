@@ -21,6 +21,13 @@ class Config:
     COMMENTS_PER_PAGE = 30
     SLOW_DB_QUERY_TIME = 0.5
 
+    # celery config
+    CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL') or \
+    'sqla+sqlite:///' + os.path.join(basedir, 'celery.sqlite')
+    CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND') or \
+    'sqla+sqlite:///' + os.path.join(basedir, 'celery.sqlite')
+    CELERY_TASK_SERIALIZER = 'json'
+
     @staticmethod
     def init_app(app):
         pass
@@ -106,6 +113,7 @@ class UnixConfig(ProductionConfig):
 
 
 config = {
+    'base': Config, 
     'development': DevelopmentConfig,
     'production': ProductionConfig,
     'heroku': HerokuConfig,
